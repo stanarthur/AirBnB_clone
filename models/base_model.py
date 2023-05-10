@@ -10,10 +10,15 @@ from datetime import datetime
 
 class BaseModel:
     
-    def __init__(self):
+    def __init__(self, *args, **kwargs ):
+        """sets the BaseModel instance with
+        args input
         """
-        initializes the BaseModel instance
-        """
+        if kwargs:
+            kwargs.pop('__class__', None)
+            for datakey,datavalue in kwargs.items():
+                if datakey == 'created at' or datakey == 'updated at'
+                 
         self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
