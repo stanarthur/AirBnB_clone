@@ -1,3 +1,8 @@
-#Empty file, there is no need for the file as
-#__init__.py file to identify the directory as a package
-#when a Module is imported from a package.
+#!/usr/bin/python3
+"""set Filestorage instance"""
+from models.engine.file_storage import FileStorage
+
+"""call the reload method"""
+storage = FileStorage()
+storage.reload()
+
