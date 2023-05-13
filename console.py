@@ -9,6 +9,7 @@ import json
 from shlex import split
 from models import storage
 from models.base_model import BaseModel
+from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
@@ -17,6 +18,7 @@ class HBNBCommand(cmd.Cmd):
     jfile = 'file.json'
     l_classes = {
             'BaseModel': BaseModel
+            'User': User
     }
 
     def do_create(self, arg):
