@@ -12,8 +12,10 @@ class FileStorage:
     def classes(self):
         """returns a dictionaryof valid classesn and their references"""
         from models.base_model import BaseModel
+        from models.user import User
 
-        classes = {"BaseModel": BaseModel}
+        classes = {"BaseModel": BaseModel,
+                "User": User}
         return classes
 
     def all(self):
@@ -42,3 +44,4 @@ class FileStorage:
             obj_dict = {key: self.classes()[value["__class__"]](**value)
                     for key, value in obj_dict.items()}
             FileStorage.objects = obj_dict
+    
