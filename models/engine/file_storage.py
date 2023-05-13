@@ -6,32 +6,37 @@ import os
 
 
 class FileStorage:
-    __file_path = "file.json"
-    __objects = {}
+    file_path = "file.json"
+    objects = {}
+
+    def classes(self):
+        """returns a dictionaryof valid classesn and their references"""
+        from models.base_model import BaseModel
+
+        classes = {"BaseModel": BaseModel}
+        return classes
 
     def all(self):
         """returns the dictionary __objects."""
-        return self.__objects
+        return FileStorage.objects
 
     def new(self, obj):
         """intializes new_obj in __objects dictionary."""
-        key = "{}.{}". format(type(obj).__class__.__name__, obj.id)
-        self.__objects[key] = obj
+        key = "{}.{}". format(type(obj).__name__, obj.id)
+        FileStorage.objects[key] = obj
 
     def save(self):
         """serializes __objects to JSON file"""
         serial_objects = {}
-        for s_key, s_obj in self.__objects.items():
+        for s_key, s_obj in File.objects.items():
             serial_objects[s_key] = s_obj.to_dict()
-        with open(self.__file_path, "w") as file:
-            json.dump(serial_objects, file)
+        with open(FileStorage.file_path, "w", encoding="utf-8") as jfile:
+            json.dump(serial_objects, jfile)
 
     def reload(self):
-        """Deserializes JSON file into __objects."""
-        if not os.path.isfile(self.__file_path):
-            return
-        with open(self.__file_path, "r", encoding="utf-8") as f:
-            obj_dict = json.load(f)
+        """deserializes JSON file into __objects."""
+        if not os.path.isfile(FileStorage.filepath, "r", encoding = "utf-8") as jfile:
+            obj_dict = json.load(jfile)
             obj_dict = {key: self.classes()[value["__class__"]](**value)
-                        for key, value in obj_dict.items()}
-            self.__objects = obj_dict
+                    for key, value in obj_dict.items()}
+            FileStorage.objects = obj_dict
