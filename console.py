@@ -49,7 +49,7 @@ class HBNBCommand(cmd.Cmd):
             """retrives all the objects stored in storage instance"""
 
             for key, value in all_objs.items():
-                obj_name == value.__class__.__name__
+                obj_name = value.__class__.__name__
                 """retrieves the name of the class of the object
                 'value'
                 """
@@ -112,7 +112,7 @@ class HBNBCommand(cmd.Cmd):
             print(list_instances)
 
     def do_update(self, arg):
-        arg1 = parse(arg)
+        arg1 = split(arg)
         """function is used to split and store the arguments"""
         obj_dict1 = storage.all()
 
@@ -140,7 +140,7 @@ class HBNBCommand(cmd.Cmd):
         if len(arg1) == 4:
             """updating the instance"""
             obj = obj_dict1["{}.{}".format(arg1[0], arg1[1])]
-            if args1[2] in obj.__class__.dict__.keys():
+            if arg1[2] in obj.__class__.dict__.keys():
                 val_type = type(obj.__class__.__dict__[arg1[2]])
                 obj.__dict__[arg1[2]] = val_type(arg1[3])
             else:
