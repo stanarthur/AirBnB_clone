@@ -28,14 +28,16 @@ class FileStorage:
     def save(self):
         """serializes __objects to JSON file"""
         serial_objects = {}
-        for s_key, s_obj in File.objects.items():
+        for s_key, s_obj in FileStorage.objects.items():
             serial_objects[s_key] = s_obj.to_dict()
         with open(FileStorage.file_path, "w", encoding="utf-8") as jfile:
             json.dump(serial_objects, jfile)
 
     def reload(self):
         """deserializes JSON file into __objects."""
-        if not os.path.isfile(FileStorage.filepath, "r", encoding = "utf-8") as jfile:
+        if not os.path.isfile(FileStorage.file_path):
+            return
+        with open(FileStorage.file_path, "r", encoding="utf-8") as jfile:
             obj_dict = json.load(jfile)
             obj_dict = {key: self.classes()[value["__class__"]](**value)
                     for key, value in obj_dict.items()}

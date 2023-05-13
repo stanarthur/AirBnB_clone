@@ -112,11 +112,11 @@ class HBNBCommand(cmd.Cmd):
             print(list_instances)
 
     def do_update(self, arg):
-        arg1 = split(arg)
+        arg1 = split('')
         """function is used to split and store the arguments"""
         obj_dict1 = storage.all()
 
-        if len(arg1) == 0:
+        if len(arg) == 0:
             print("** class name missing **")
             return False
         if arg1[0] not in HBNBCommand.l_classes:
@@ -125,18 +125,17 @@ class HBNBCommand(cmd.Cmd):
         if len(arg1) == 1:
             print("** instance id missing **")
             return False
-        if "{}.{}".format(arg[0], arg[1]) not in obj_dict1.keys():
+        if "{}.{}".format(arg1[0], arg[1]) not in obj_dict1.keys():
             print("** no instance found **")
             return False
         if len(arg1) == 2:
             print("** attribute name missing **")
             return False
-        if len(arg1) == 3:
-            try:
-                type(eval(arg1[2])) != dict
-            except NameError:
-                print("** value missing **")
-                return False
+        if len(arg1) > 3:
+            value = arg1[3]
+        else:
+            print("** value missing **")
+            return False
         if len(arg1) == 4:
             """updating the instance"""
             obj = obj_dict1["{}.{}".format(arg1[0], arg1[1])]
