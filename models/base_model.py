@@ -9,10 +9,9 @@ from models import storage
 
 
 class BaseModel:
-    
     """updates the instance of the instance BaseModel"""
 
-    def __init__(self, *args, **kwargs ):
+    def __init__(self, *args, **kwargs):
 
         """**Kwargs and *args:
         *args: list of arguments.
@@ -35,7 +34,8 @@ class BaseModel:
         """str function returns string representation
         of BaseModel instance
         """
-        return "[{}] ({}) {}".format(type(self).__name__, self.id, self.__dict__)
+        return "[{}] ({}) {}"\
+            .format(type(self).__name__, self.id, self.__dict__)
 
     def save(self):
         """save function updates the public instance attribute
@@ -54,4 +54,3 @@ class BaseModel:
         data_dict["created_at"] = self.created_at.isoformat()
         data_dict["updated_at"] = self.updated_at.isoformat()
         return data_dict
-
