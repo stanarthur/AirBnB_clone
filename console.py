@@ -18,7 +18,7 @@ class HBNBCommand(cmd.Cmd):
     jfile = 'file.json'
     l_classes = {
             'BaseModel': BaseModel
-            #'User': User
+            'User': User
     }
 
     def do_create(self, arg):
@@ -26,7 +26,7 @@ class HBNBCommand(cmd.Cmd):
         the id an instance of BaseModel
         """
         if not arg:
-            print("** class name is missing **")
+            print("** class name missing **")
         elif arg not in HBNBCommand.l_classes:
             print("** class doesn't exist **")
         else:
