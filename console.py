@@ -17,8 +17,18 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
     jfile = 'file.json'
     l_classes = {
+<<<<<<< HEAD
             'BaseModel': BaseModel
             #'User': User
+=======
+        "BaseModel",
+        "User",
+        "State",
+        "City",
+        "Place",
+        "Amenity",
+        "Review"
+>>>>>>> f3d0a78 (transferring to github)
     }
 
     def do_create(self, arg):
