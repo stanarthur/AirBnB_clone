@@ -1,6 +1,4 @@
 #!/usr/bin/python3
-
-
 """
 Console For AirBnb Clone
 """
@@ -10,6 +8,11 @@ from shlex import split
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
+from models.state import State
+from models.city import City
+from models.place import Place
+from models.amenity import Amenity
+from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
@@ -17,10 +20,6 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
     jfile = 'file.json'
     l_classes = {
-<<<<<<< HEAD
-            'BaseModel': BaseModel
-            #'User': User
-=======
         "BaseModel",
         "User",
         "State",
@@ -28,7 +27,6 @@ class HBNBCommand(cmd.Cmd):
         "Place",
         "Amenity",
         "Review"
->>>>>>> f3d0a78 (transferring to github)
     }
 
     def do_create(self, arg):
@@ -40,7 +38,7 @@ class HBNBCommand(cmd.Cmd):
         elif arg not in HBNBCommand.l_classes:
             print("** class doesn't exist **")
         else:
-            class_object = HBNBCommand.l_classes[arg]
+            class_object = eval(arg)
             """creating a new instance"""
             my_model = class_object()
             print(my_model.id)
@@ -86,7 +84,7 @@ class HBNBCommand(cmd.Cmd):
 
         args = arg.split(' ')
 
-        if args[0] not in HBNBCommand.l.classes:
+        if args[0] not in HBNBCommand.l_classes:
             print("** class doesn't exist **")
         elif len(args) == 1:
             print("** instance id missing **")
@@ -160,7 +158,7 @@ class HBNBCommand(cmd.Cmd):
                 obj.__dict__[arg1[2]] = val_type(arg1[3])
             else:
                 obj.__dict__[arg1[2]] = arg1[3]
-        elif type(eval(arg1[2])) == dict:
+        elif type(arg1[2]) == dict:
             obj = obj_dict1["{}.{}".format(arg1[0], arg1[1])]
             for key1, value1 in eval(arg1[2]).items():
                 if (key1 in obj.__class__.__dict__.keys() and
@@ -180,12 +178,6 @@ class HBNBCommand(cmd.Cmd):
     def do_EOF(self, line):
         """Exit the program"""
         return True
-
-    def emptyline(self):
-        """
-        Do nothing when an empty line is entered
-        """
-        pass
 
 """ensures that the code runs
 only when console.py file is run""" 

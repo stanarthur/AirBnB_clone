@@ -1,6 +1,7 @@
+#!/usr/bin/python3
 from models.base_model import BaseModel
 
-class Model(BaseModel):
+class City(BaseModel):
     """City class"""
     state_id = ""
     name = ""
