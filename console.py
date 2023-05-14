@@ -74,33 +74,6 @@ class HBNBCommand(cmd.Cmd):
                     return
             print("** no instance found **")
 
-    def do_destroy(self, arg):
-        """deletes an string representation
-        of an intance based on the class name and id
-        """
-
-        if not arg:
-            print("** class name missing **")
-            return
-
-        args = arg.split(' ')
-
-        if args[0] not in HBNBCommand.l_classes:
-            print("** class doesn't exist **")
-        elif len(args) == 1:
-            print("** instance id missing **")
-        else:
-            all_objs = storage.all()
-            for key, value in all_objs.items():
-                obj_name = value.__class__.__name__
-                obj_id = value.id
-                if obj_name == arg[0] and obj_id == args[1].strip('"'):
-                    del value
-                    del storage.__FileStorage__objects[key]
-                    storage.save()
-                    return
-                print("** no instance found **")
-
     def do_all(self, arg):
         """ Prints string represention of all instances
         of a given class 
@@ -126,39 +99,73 @@ class HBNBCommand(cmd.Cmd):
                     """
             print(list_instances)
 
-    def do_update(self, arg):
-        args = split(arg)
-        """function is used to split and store the arguments"""
-        obj_dict1 = storage.all()
+    def do_destroy(self, arg):
+        """deletes an instance based on the class name and id"""
 
-        if len(arg) == 0:
+        if not arg:
             print("** class name missing **")
-            return False
+            return
+
+        args = arg.split(' ')
+
         if args[0] not in HBNBCommand.l_classes:
             print("** class doesn't exist **")
-            return False
-        if len(args) == 1:
+            return
+        elif len(args) == 1:
             print("** instance id missing **")
-            return False
-        if "{}.{}".format(args[0], args[1]) not in obj_dict1.keys():
+            return
+
+        objs = storage.all()
+        obj_key = args[0] + '.' + args[1]
+        if obj_key in objs:
+            del objs[obj_key]
+            storage.save()
+        else:
             print("** no instance found **")
-            return False
+    
+    def do_update(self, arg):
+        """updates an instance based on the class name and id"""
+
+        if not arg:
+            print("** class name missing **")
+            return
+
+        args = split(arg)
+        if args[0] not in HBNBCommand.l_classes:
+            print("** class doesn't exist **")
+            return
+        elif len(args) == 1:
+            print("** instance id missing **")
+            return
+
+        objs = storage.all()
+        obj_key = args[0] + '.' + args[1]
+        if obj_key not in objs:
+            print("** no instance found **")
+            return
+
+        obj = objs[obj_key]
+        attr_dict = obj.to_dict()
         if len(args) == 2:
             print("** attribute name missing **")
-            return False
-        if len(args) < 4:
+            return
+        elif len(args) == 3:
             print("** value missing **")
-            return False
-            
-        """updating the instance"""
-        obj = obj_dict1["{}.{}".format(args[0], args[1])]
-        if args[2] in obj.__class__.__dict__.keys():
-            obj.__dict__[args[2]] = type(obj.__class__.__dict__[args[2]])
-        else:
-            obj.__dict__[args[2]] = args[3]
-        storage.save() 
-        return True
+            return
 
+        attr_name, attr_value = args[2], args[3]
+        if attr_name not in attr_dict:
+            obj.__setattr__(attr_name, attr_value)
+            storage.save()
+        else:
+            attr_type = type(attr_dict[attr_name])
+            try:
+                attr_value = attr_type(attr_value)
+            except ValueError:
+                pass
+            obj.__setattr__(attr_name, attr_value)
+            storage.save()
+    
     def default(self, arg):
         """Default behaviour for cmd module when input is invalid"""
         argdict = {
@@ -198,3 +205,4 @@ class HBNBCommand(cmd.Cmd):
 only when console.py file is run""" 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
+
