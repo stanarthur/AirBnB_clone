@@ -18,7 +18,7 @@ class HBNBCommand(cmd.Cmd):
     jfile = 'file.json'
     l_classes = {
             'BaseModel': BaseModel
-            'User': User
+            #'User': User
     }
 
     def do_create(self, arg):
