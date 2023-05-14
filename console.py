@@ -126,50 +126,37 @@ class HBNBCommand(cmd.Cmd):
             print(list_instances)
 
     def do_update(self, arg):
-        arg1 = split('')
+        args = split(arg)
         """function is used to split and store the arguments"""
         obj_dict1 = storage.all()
 
         if len(arg) == 0:
             print("** class name missing **")
             return False
-        if arg1[0] not in HBNBCommand.l_classes:
+        if args[0] not in HBNBCommand.l_classes:
             print("** class doesn't exist **")
             return False
-        if len(arg1) == 1:
+        if len(args) == 1:
             print("** instance id missing **")
             return False
-        if "{}.{}".format(arg1[0], arg[1]) not in obj_dict1.keys():
+        if "{}.{}".format(args[0], args[1]) not in obj_dict1.keys():
             print("** no instance found **")
             return False
-        if len(arg1) == 2:
+        if len(args) == 2:
             print("** attribute name missing **")
             return False
-        if len(arg1) > 3:
-            value = arg1[3]
-        else:
+        if len(args) < 4:
             print("** value missing **")
             return False
-        if len(arg1) == 4:
-            """updating the instance"""
-            obj = obj_dict1["{}.{}".format(arg1[0], arg1[1])]
-            if arg1[2] in obj.__class__.dict__.keys():
-                val_type = type(obj.__class__.__dict__[arg1[2]])
-                obj.__dict__[arg1[2]] = val_type(arg1[3])
-            else:
-                obj.__dict__[arg1[2]] = arg1[3]
-        elif type(arg1[2]) == dict:
-            obj = obj_dict1["{}.{}".format(arg1[0], arg1[1])]
-            for key1, value1 in eval(arg1[2]).items():
-                if (key1 in obj.__class__.__dict__.keys() and
-                        type(obj.__class__.__dict__[key1]) in
-                        {str, int, float}):
-                    val_type = type(obj.__class__.__dict__[key1])
-                    obj.__dict__[key1] = val_type(value1)
-                else:
-                    obj.__dict__[key1] = val_type(value1)
+            
+        """updating the instance"""
+        obj = obj_dict1["{}.{}".format(args[0], args[1])]
+        if args[2] in obj.__class__.__dict__.keys():
+            obj.__dict__[args[2]] = type(obj.__class__.__dict__[args[2]])
+        else:
+            obj.__dict__[args[2]] = args[3]
         storage.save() 
-        return split(arg)
+        return True
 
     def do_quit(self, line):
         """commmand to exit program"""
