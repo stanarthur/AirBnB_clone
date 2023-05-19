@@ -1,25 +1,29 @@
 0x00. AirBnB clone - The console
 
+![AirBnB Logo](https://www.pngitem.com/pimgs/m/132-1322125_transparent-background-airbnb-logo-hd-png-download.png)
 
+##Project Description
 
-Description:
 The console is the first segment of the AirBnB project at the ALX Software Engineering School that will collectively cover fundamental concepts of higher level programming. The goal of AirBnB project . This the first part of it the console( command line interepteur)
 
-Installation
-Clone This Repo git clone git@github.com:stanarthur/AirBnB_clone.git
-Access AirBnb directory: cd AirBnB_clone
-Run hbnb(interactively): ./console and enter command
-Run hbnb(non-interactively): echo "<command>" | ./console.py
-Available Command:
-quit and EOF to exit the program
-help for every Command
-create
-show
-destroy
-all
-update
-count
-Examples of use
+
+##Installation##
+*Clone This Repo git clone git@github.com:stanarthur/AirBnB_clone.git
+*Access AirBnb directory: cd AirBnB_clone
+*Run hbnb(interactively): ./console and enter command
+*Run hbnb(non-interactively): echo "<command>" | ./console.py
+
+###Available Command:
+*quit and EOF to exit the program
+*help for every Command
+*create
+*show
+*destroy
+*all
+*update
+*count
+
+###Examples of use
 vagrantAirBnB_clone$./console.py
 (hbnb) help
 
