@@ -218,5 +218,6 @@ class TestConsole(unittest.TestCase):
             output = f.getvalue().strip()
             self.assertEqual(output, "** class name missing **")
 
+
 if __name__ == "__main__":
     unittest.main()
