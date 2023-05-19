@@ -19,15 +19,14 @@ class FileStorage:
         from models.place import Place
         from models.review import Review
 
-
-        classes = {"BaseModel": BaseModel,
-                "User": User,
-                "State": State,
-                "City": City,
-                "Amenity": Amenity,
-                "Place": Place,
-                "Review": Review}
-        return classes
+        """classes = {"BaseModel": BaseModel,
+           "User": User,
+           "State": State,
+           "City": City,
+           "Amenity": Amenity,
+           "Place": Place,
+           "Review": Review}
+            return classes"""
 
     def all(self):
         """returns the dictionary __objects."""
@@ -53,7 +52,7 @@ class FileStorage:
         with open(FileStorage.file_path, "r", encoding="utf-8") as jfile:
             obj_dict = json.load(jfile)
             obj_dict = {key: self.classes()[value["__class__"]](**value)
-                    for key, value in obj_dict.items()}
+                        for key, value in obj_dict.items()}
             FileStorage.objects = obj_dict
 
     def attributes(self):
