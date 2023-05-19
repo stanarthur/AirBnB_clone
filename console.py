@@ -115,7 +115,7 @@ class HBNBCommand(cmd.Cmd):
                 return
 
     def do_all(self, line):
-        """Prints all string representation of all instances"""
+        """Prints all string representation of all instances based"""
         all_obj = []
         response = "** class doesn't exist **"
         if not line:
@@ -253,9 +253,9 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** invalid syntax **")
                 return
-            except Exception:
-                print("** invalid syntax **")
-                return
+        except Exception:
+            print("** invalid syntax **")
+            return
 
 
 if __name__ == '__main__':
