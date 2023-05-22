@@ -1,0 +1,31 @@
+/*
+ * === Global style ===
+*/
+
+/* Body style */
+body {
+    color: #484848;
+    font: 14px Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    width: 100%;
+    display: flex;
+    flex-direction: space-between;
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+
+}
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+}
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+}
+/* Strong style */
+.container {
+    font-weight: bold;
+    max-width: 1920px;
+    margin: 0 auto
+}
